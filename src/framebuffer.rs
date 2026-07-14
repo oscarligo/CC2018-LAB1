@@ -5,12 +5,12 @@ pub struct Framebuffer {
     pub height: u32,
     pub color_buffer: Image,
     background_color: Color,
-    current_color: Color,
+    pub current_color: Color,
 }
 
 impl Framebuffer {
     pub fn new(width: u32, height: u32, background_color: Color) -> Self {
-        let color_buffer = Image::gen_image_color(width, height, background_color);
+        let color_buffer = Image::gen_image_color(width as i32, height as i32, background_color);
         Framebuffer {
             width,
             height,
@@ -21,12 +21,12 @@ impl Framebuffer {
     }
 
     pub fn clear(&mut self) {
-        self.color_buffer = Image::gen_image_color(self.width, self.height, self.background_color);
+        self.color_buffer = Image::gen_image_color(self.width as i32, self.height as i32, self.background_color);
     }   
 
     pub fn set_pixel(&mut self, x: u32, y: u32, color: Color) {
         if x < self.width && y < self.height {
-            self.color_buffer.set_pixel(x, y, color);
+            self.color_buffer.draw_pixel(x as i32, y as i32, color);
         }
     }
 
