@@ -2,9 +2,8 @@ mod framebuffer;
 mod line;
 mod polygon;
 
-use raylib::{ffi::RaylibPalette, prelude::*};
+use raylib::prelude::*;
 use framebuffer::Framebuffer;
-use line::line;
 use polygon::Polygon;
 
 fn main() {
@@ -41,7 +40,7 @@ fn main() {
     ];
 
     let poligono_2 = Polygon::new(poligono_2);
-    poligono_2.fill(&mut framebuffer, Color::WHITE);
+    poligono_2.fill(&mut framebuffer, Color::BLUE);
     poligono_2.draw_outline(&mut framebuffer, Color::WHITE);
 
     // (377, 249) (411, 197) (436, 249)
@@ -53,8 +52,8 @@ fn main() {
     ];
 
     let poligono_3 = Polygon::new(poligono_3);
+    poligono_3.fill(&mut framebuffer, Color::RED);
     poligono_3.draw_outline(&mut framebuffer, Color::WHITE);
-    // poligono_3.fill(&mut framebuffer, Color::WHITE);
     
     // (413, 177) (448, 159) (502, 88) (553, 53) (535, 36) (676, 37) (660, 52)
     // (750, 145) (761, 179) (672, 192) (659, 214) (615, 214) (632, 230) (580, 230)
@@ -84,6 +83,7 @@ fn main() {
     let poligono_4 = Polygon::new(poligono_4);
     poligono_4.fill(&mut framebuffer, Color::GREEN);
     poligono_4.draw_outline(&mut framebuffer, Color::WHITE);
+    
 
     
     
@@ -97,8 +97,8 @@ fn main() {
     ];
 
     let poligono_5 = Polygon::new(poligono_5);
+    poligono_5.fill(&mut framebuffer, Color::BLACK);
     poligono_5.draw_outline(&mut framebuffer, Color::WHITE);
-    // poligono_5.fill(&mut framebuffer, Color::WHITE);
 
 
     framebuffer.render_to_file("output.png");

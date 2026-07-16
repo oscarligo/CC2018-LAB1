@@ -28,8 +28,8 @@ impl Polygon {
 
         framebuffer.set_current_color(color);
 
-        let mut min_y = f32::MAX;
-        let mut max_y = f32::MIN;
+        let mut min_y: f32 = f32::MAX;
+        let mut max_y: f32 = f32::MIN;
 
         for v in &self.vertices {
             if v.y < min_y { min_y = v.y; }
