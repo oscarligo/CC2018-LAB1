@@ -1,6 +1,7 @@
 mod framebuffer;
 mod line;
 mod polygon;
+mod filling;
 
 use raylib::prelude::*;
 use framebuffer::Framebuffer;
@@ -9,6 +10,7 @@ use polygon::Polygon;
 fn main() {
     let mut framebuffer = Framebuffer::new(800, 600, Color::BLACK);
     framebuffer.clear();
+    framebuffer.set_background_color(Color::PURPLE);
 
     // (165, 380) (185, 360) (180, 330) (207, 345) (233, 330) (230, 360) (250, 380) (220, 385) (205, 410) (193, 383)
 
@@ -27,8 +29,10 @@ fn main() {
 
 
     let poligono_1 = Polygon::new(poligono_1);
-    poligono_1.fill(&mut framebuffer, Color::YELLOW);
     poligono_1.draw_outline(&mut framebuffer, Color::WHITE);
+
+    filling::flood_fill(&mut framebuffer, Vector2::new(200.0, 350.0), Color::YELLOW);
+
 
     // (321, 335) (288, 286) (339, 251) (374, 302)
 
@@ -40,8 +44,8 @@ fn main() {
     ];
 
     let poligono_2 = Polygon::new(poligono_2);
-    poligono_2.fill(&mut framebuffer, Color::BLUE);
     poligono_2.draw_outline(&mut framebuffer, Color::WHITE);
+    filling::flood_fill(&mut framebuffer, Vector2::new(320.0, 300.0), Color::BLUE);
 
     // (377, 249) (411, 197) (436, 249)
 
@@ -52,8 +56,8 @@ fn main() {
     ];
 
     let poligono_3 = Polygon::new(poligono_3);
-    poligono_3.fill(&mut framebuffer, Color::RED);
     poligono_3.draw_outline(&mut framebuffer, Color::WHITE);
+    filling::flood_fill(&mut framebuffer, Vector2::new(410.0, 230.0), Color::RED);
     
     // (413, 177) (448, 159) (502, 88) (553, 53) (535, 36) (676, 37) (660, 52)
     // (750, 145) (761, 179) (672, 192) (659, 214) (615, 214) (632, 230) (580, 230)
@@ -81,12 +85,8 @@ fn main() {
     ];
 
     let poligono_4 = Polygon::new(poligono_4);
-    poligono_4.fill(&mut framebuffer, Color::GREEN);
     poligono_4.draw_outline(&mut framebuffer, Color::WHITE);
-    
 
-    
-    
     // (682, 175) (708, 120) (735, 148) (739, 170)
 
     let poligono_5: Vec<Vector2> = vec![
@@ -97,9 +97,9 @@ fn main() {
     ];
 
     let poligono_5 = Polygon::new(poligono_5);
-    poligono_5.fill(&mut framebuffer, Color::BLACK);
     poligono_5.draw_outline(&mut framebuffer, Color::WHITE);
 
+    filling::flood_fill(&mut framebuffer, Vector2::new(600.0, 150.0), Color::GREEN);
 
     framebuffer.render_to_file("output.png");
 

@@ -22,7 +22,7 @@ impl Framebuffer {
 
     pub fn clear(&mut self) {
         self.color_buffer = Image::gen_image_color(self.width as i32, self.height as i32, self.background_color);
-    }   
+    } 
 
     pub fn set_pixel(&mut self, x: u32, y: u32) {
         if x < self.width && y < self.height {
@@ -36,9 +36,26 @@ impl Framebuffer {
 
     pub fn set_background_color(&mut self, color: Color) {
         self.background_color = color;
+        self.color_buffer = Image::gen_image_color(self.width as i32, self.height as i32, self.background_color);
     }
 
     pub fn render_to_file(&self, filename: &str) {
         self.color_buffer.export_image(filename);
-    }   
+    } 
+
+    pub fn get_pixel(&self, x: u32, y: u32) -> Color {
+        if x < self.width && y < self.height {
+            self.color_buffer.get_color(x as i32, y as i32)
+        } else {
+            self.background_color
+        }
+    }     
+
+//     pub fn swap_buffers(&mut self, window: &mut RaylibHandle, raylib_thread: &mut RaylibThread) {
+//         if let Ok(texture) = Texture2D::load_texture_from_image(raylib_thread, &self.color_buffer) {
+//             let mut renderer = window.begin_drawing(raylib_thread);
+            
+//             renderer.draw_texture(&texture, 0, 0, Color::WHITE);
+//         }
+//     }
 }
